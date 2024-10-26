@@ -2,21 +2,21 @@ version: '3.8'
 services:
   postgres:
     image: postgres:13
-    container_name: bibliotheque_postgres
+    container_name: library_postgres
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: library_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - bibliotheque-network
+      - library-network
 
 volumes:
   postgres_data:
 
 networks:
-  bibliotheque-network:
+  library-network:
     driver: bridge
