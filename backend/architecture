@@ -22,9 +22,6 @@
 │   ├── userRoutes.js     # Routes pour les utilisateurs
 │   └── bookRoutes.js     # Routes pour les livres
 │
-├── /utils                # Fonctions utilitaires
-│   └── helpers.js        # Fonctions d'aide (par exemple, pour la validation)
-│
 ├── .env                  # Variables d'environnement
 ├── server.js             # Point d'entrée de l'application
 └── package.json          # Dépendances du projet
