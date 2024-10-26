@@ -9,7 +9,7 @@ exports.register = async (req, res, next) => {
 
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) {
-            return next({ status: 409, message: 'User already exists' }); // Conflit
+            return next({ status: 409, message: 'User already exists' });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
