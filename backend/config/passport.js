@@ -1,4 +1,3 @@
-// /config/passport.js
 const { Strategy, ExtractJwt } = require('passport-jwt');
 const User = require('../models/User');
 const dotenv = require('dotenv');

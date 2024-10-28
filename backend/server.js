@@ -8,14 +8,22 @@ const bookRoutes = require('./routes/bookRoutes');
 const errorMiddleware = require('./middleware/errorMiddleware');
 const sequelize = require('./config/db');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 require('./config/passport')(passport);
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(passport.initialize());
-app.use(cors());
+
+const FRONTEND = process.env.FRONTEND || 'http://localhost:3000'
+
+app.use(cors({
+    origin: FRONTEND,
+    credentials: true,
+}));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
