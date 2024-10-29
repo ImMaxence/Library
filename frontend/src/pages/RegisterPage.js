@@ -55,6 +55,7 @@ const RegisterPage = () => {
                 />
                 <button type="submit">Register</button>
             </form>
+            <button onClick={() => navigate('/')}>Se connecter</button>
         </div>
     );
 };

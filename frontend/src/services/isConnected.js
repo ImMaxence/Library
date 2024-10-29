@@ -10,9 +10,13 @@ export const isConnected = async () => {
             return { isAuthenticated: false };
         }
 
+        console.log("✅ Token OK - next")
         const data = await response.json();
-        return { isAuthenticated: true, ...data };
+        return { isAuthenticated: true, data };
+        // return await response.json();
+        // return { isAuthenticated: true };
     } catch (error) {
+        console.log("❌ Catch")
         console.error('Error verifying token:', error);
         return { isAuthenticated: false };
     }

@@ -45,7 +45,6 @@ export const register = async ({ username, password }) => {
     }
 };
 
-
 export const logout = async () => {
     try {
         isConnected()

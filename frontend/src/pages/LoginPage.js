@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
+import { getCurrentUser } from '../services/userService';
+// import { motion } from 'framer-motion'
+// import { boxVariants } from '../utils/framerMotion'
 
 const LoginPage = ({ updateAuthStatus }) => {
     const [username, setUsername] = useState('');
@@ -21,10 +24,23 @@ const LoginPage = ({ updateAuthStatus }) => {
         }
     };
 
+    const [data, setData] = useState([])
+
+    const handleGetCurrentUser = async () => {
+        try {
+            const currentUser = await getCurrentUser();
+            setData(currentUser)
+            console.log(currentUser)
+        } catch (err) {
+            setError(err)
+            console.log(err)
+        }
+    }
+
     return (
         <div>
             <h1>Login Page</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -42,6 +58,18 @@ const LoginPage = ({ updateAuthStatus }) => {
                 />
                 <button type="submit">Send</button>
             </form>
+            <button onClick={() => navigate('/register')}>S'enregistrer</button>
+
+
+            <div className="test">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+            </div>
+
+            <button onClick={handleGetCurrentUser}>fetch current user info (only if token is present in coockie)</button>
         </div>
     );
 };
