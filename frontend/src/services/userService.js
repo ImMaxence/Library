@@ -1,8 +1,5 @@
-import { isConnected } from "./isConnected";
-
 export const getCurrentUser = async () => {
     try {
-        await isConnected();
         const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/users/profile`, {
             method: 'GET',
             credentials: 'include',

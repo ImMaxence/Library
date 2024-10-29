@@ -3,7 +3,7 @@ import { logout } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import { getAllBooks } from '../services/booksService'
 
-const HomePage = ({ updateAuthStatus }) => {
+const HomePage = () => {
 
     const [error, setError] = useState(null);
     const [data, setData] = useState([]);
@@ -14,7 +14,6 @@ const HomePage = ({ updateAuthStatus }) => {
 
         try {
             await logout();
-            await updateAuthStatus();
             navigate('/')
         } catch (err) {
             setError('Error log out');

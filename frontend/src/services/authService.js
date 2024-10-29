@@ -1,5 +1,3 @@
-import { isConnected } from "./isConnected";
-
 export const login = async ({ username, password }) => {
     try {
         const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/auth/login`, {
@@ -8,7 +6,7 @@ export const login = async ({ username, password }) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ username, password }),
-            credentials: 'include',
+            // credentials: 'include',
         });
 
         if (!response.ok) {
@@ -30,7 +28,7 @@ export const register = async ({ username, password }) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ username, password }),
-            credentials: 'include',
+            // credentials: 'include',
         });
 
         if (!response.ok) {
@@ -47,10 +45,8 @@ export const register = async ({ username, password }) => {
 
 export const logout = async () => {
     try {
-        isConnected()
         const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/auth/logout`, {
             method: 'POST',
-            credentials: 'include',
         });
 
         if (!response.ok) {

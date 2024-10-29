@@ -5,7 +5,7 @@ import { getCurrentUser } from '../services/userService';
 // import { motion } from 'framer-motion'
 // import { boxVariants } from '../utils/framerMotion'
 
-const LoginPage = ({ updateAuthStatus }) => {
+const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -16,8 +16,7 @@ const LoginPage = ({ updateAuthStatus }) => {
 
         try {
             await login({ username, password });
-            await updateAuthStatus();
-            navigate('/');
+            navigate('/home');
         } catch (err) {
             setError('Invalid username or password');
             console.log(err);

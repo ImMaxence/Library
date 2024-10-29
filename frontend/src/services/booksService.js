@@ -1,8 +1,5 @@
-import { isConnected } from "./isConnected";
-
 export const getAllBooks = async () => {
     try {
-        await isConnected();
         const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/books`, {
             method: 'GET',
             credentials: 'include',
@@ -21,7 +18,6 @@ export const getAllBooks = async () => {
 
 export const addBook = async (data) => {
     try {
-        await isConnected();
         const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/books`, {
             method: 'POST',
             headers: {
