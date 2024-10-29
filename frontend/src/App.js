@@ -8,6 +8,9 @@ import HomePage from './pages/HomePage'
 import Navbar from './components/Navbar'
 
 const App = () => {
+
+  // faire le verify token
+
   return (
     <BrowserRouter>
       <Navbar />

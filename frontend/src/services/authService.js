@@ -1,61 +1,47 @@
+import { api } from '../services/apiConfig';
+
 export const login = async ({ username, password }) => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-            // credentials: 'include',
+        const response = await api.post('/api/auth/login', {
+            username,
+            password
         });
 
-        if (!response.ok) {
-            throw new Error('Error login');
-        }
-
-        return await response.json();
+        return response.data;
     } catch (error) {
-        console.error('Technical error front:', error);
-        throw error;
+        throw new Error('Technical error during login');
     }
 };
 
 export const register = async ({ username, password }) => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/auth/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-            // credentials: 'include',
+        const response = await api.post('/api/auth/register', {
+            username,
+            password
         });
 
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            throw new Error(`Error register: ${response.status} - ${errorMessage}`);
-        }
-
-        return await response.json();
+        return response.data;
     } catch (error) {
-        console.error('Technical error front:', error);
-        throw error;
+        throw new Error('Technical error during registration');
     }
 };
 
 export const logout = async () => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/auth/logout`, {
-            method: 'POST',
-        });
+        const response = await api.post('/api/auth/logout', {});
 
-        if (!response.ok) {
-            throw new Error('Error register');
-        }
-
-        return await response.json();
+        return response.data;
     } catch (error) {
-        console.error('Technical error front:', error);
-        throw error;
+        throw new Error('Technical error during logout');
+    }
+};
+
+export const checkToken = async () => {
+    try {
+        const response = await api.get('/api/auth/verify-token', {});
+
+        return response.data;
+    } catch (error) {
+        throw new Error('Technical error during logout');
     }
 };

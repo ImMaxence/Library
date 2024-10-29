@@ -1,39 +1,21 @@
+import { api } from '../services/apiConfig';
+
 export const getAllBooks = async () => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/books`, {
-            method: 'GET',
-            credentials: 'include',
-        });
-
-        if (!response.ok) {
-            throw new Error('Error retrieving books');
-        }
-
-        return await response.json();
+        const response = await api.get('/api/books');
+        return response.data;
     } catch (error) {
-        console.error('Technical error front:', error);
-        throw error;
+        throw new Error('Technical error during book retrieval');
     }
 };
 
-export const addBook = async (data) => {
+export const addBook = async ({ data }) => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/books`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-            credentials: 'include',
+        const response = await api.post('/api/books', {
+            data
         });
-
-        if (!response.ok) {
-            throw new Error('Error retrieving books');
-        }
-
-        return await response.json();
+        return response.data;
     } catch (error) {
-        console.error('Technical error front:', error);
-        throw error;
+        throw new Error('Technical error during book addition');
     }
 };

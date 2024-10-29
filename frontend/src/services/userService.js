@@ -1,17 +1,10 @@
+import { api } from '../services/apiConfig';
+
 export const getCurrentUser = async () => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_URL_BACK}/api/users/profile`, {
-            method: 'GET',
-            credentials: 'include',
-        });
-
-        if (!response.ok) {
-            throw new Error('Error retrieving books');
-        }
-
-        return await response.json();
+        const response = await api.get('/api/users/profile');
+        return response.data;
     } catch (error) {
-        console.error('Technical error front:', error);
-        throw error;
+        throw new Error('Technical error during current user retrieval');
     }
 };

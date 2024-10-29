@@ -48,17 +48,6 @@ exports.logout = (req, res) => {
     res.json({ message: 'Logout successful' });
 };
 
-// exports.verifyToken = (req, res, next) => {
-//     const token = req.cookies.token; // Récupérer le token du cookie
-//     if (!token) {
-//         return next({ status: 401, message: 'No token provided' });
-//     }
-
-//     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-//         if (err) {
-//             return next({ status: 403, message: 'Failed to authenticate token' });
-//         }
-
-//         res.json({ message: 'Token is valid', userId: decoded.id });
-//     });
-// };
+exports.verifyToken = (req, res) => {
+    res.json({ isAuthenticated: true, userId: req.user.id });
+};

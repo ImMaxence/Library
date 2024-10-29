@@ -11,15 +11,16 @@ module.exports = (req, res, next) => {
     // Ajoute le token au header Authorization pour que Passport puisse l'utiliser
     req.headers.authorization = `Bearer ${token}`;
 
-    // Utilise Passport pour authentifier le token
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
         if (err) {
-            return next(err);
+            return res.status(500).json({ isAuthenticated: false, message: 'Authentication error', error: err });
         }
         if (!user) {
-            return next({ status: 403, message: 'Failed to authenticate token' });
+            return res.status(403).json({ isAuthenticated: false, message: 'Failed to authenticate token' });
         }
-        req.user = user; // Ajoute l'utilisateur à la requête, pour partie admin plus tard
+
+        // Si l'utilisateur est authentifié, ajoutez l'utilisateur à la requête
+        req.user = user;
         next();
     })(req, res, next);
 };
