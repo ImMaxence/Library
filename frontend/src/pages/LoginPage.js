@@ -17,6 +17,10 @@ const LoginPage = () => {
         try {
             await login({ username, password });
             navigate('/home');
+            //  Petite information, dans la console du navigateur, quand on se connecte
+            //  Ca fait d'abord un call api pour le /login, mais vu qu'on accede à une 
+            //  route protected (voir app.js) ca va aussi verifier la validé du token
+            //  d'où la doule request
         } catch (err) {
             setError('Invalid username or password');
             console.log(err);

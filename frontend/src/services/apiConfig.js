@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { logout } from '../services/authService'
+import { logout } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
 export const api = axios.create({
@@ -9,18 +9,21 @@ export const api = axios.create({
 
 api.interceptors.request.use(
     async (config) => {
-        // refresh token ici plus tard
+        console.log("[API SERVICE FRONT] : 🚀 Request...");
         return config;
     },
     (error) => Promise.reject(error)
 );
 
 api.interceptors.response.use(
-    (response) => response,
+    (response) => {
+        console.log("[API SERVICE FRONT] : 👮‍♂️ Tout est en ordre !");
+        return response;
+    },
     async (error) => {
         if (error.response && error.response.status === 401) {
-            console.log("Token expiré ou invalide");
-            let navigate = useNavigate()
+            console.log("[API SERVICE FRONT] : ❌ Token expiré ou invalide");
+            let navigate = useNavigate();
             logout();
             navigate('/');
         }
