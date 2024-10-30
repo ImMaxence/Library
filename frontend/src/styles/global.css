@@ -1,9 +1,66 @@
+@font-face {
+    font-family: 'Nunito';
+    src: url('../assets/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+:root {
+    /* Fonts */
+    --font-nunito: "Nunito", sans-serif;
+
+    /* Couleurs de fond 
+
+    Blanc doux pour le fond principal
+    Gris clair pour le fond des cartes ou sections
+    */
+    --background-color: #ffffff;
+    --card-background: #f4f4f4;
+
+    /* Couleurs du texte 
+
+    Gris foncé pour le texte général
+    Bleu ardoise vibrant pour les titres et en-têtes
+    Teal vif pour les petits en-têtes ou sous-textes
+    */
+    --text-color: #3a3a3a;
+    --heading-color: #6a8caf;
+    --subheading-color: #3ba3a3;
+
+    /* Couleurs d'accent
+
+    Vert sauge doux pour les éléments secondaires
+    Corail chaud pour des accents supplémentaires
+    */
+    --accent-color: #b7cbbf;
+    --coral-accent: #ff9b71;
+
+    /* Couleurs de surbrillance 
+
+    Orange vif pour les boutons d'appel à l'action
+    Jaune électrique pour les éléments surlignés
+    */
+    --button-color: #ff7a59;
+    --highlight-color: #ffdd57;
+
+    /* Bordures et ombres 
+    
+    Gris clair pour des bordures subtiles
+    Ombre légère pour la profondeur
+    */
+    --border-color: #dcdcdc;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: var(--font-nunito);
 }
 
-:root {
-    --color-1: red
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background-color);
 }

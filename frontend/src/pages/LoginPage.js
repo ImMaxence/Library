@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
-import { getCurrentUser } from '../services/userService';
+import { Button, Checkbox, Form, Input } from 'antd';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -26,39 +26,15 @@ const LoginPage = () => {
     };
 
     return (
-        <div>
+        <div className='login_container'>
             <h1>Login Page</h1>
-            {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Send</button>
+                <Input onChange={(e) => setUsername(e.target.value)} />
+                <Input.Password onChange={(e) => setPassword(e.target.value)} />
+                <Button type="primary" htmlType="submit">Envoyer</Button>
+                <Button type="primary" onClick={() => navigate('/register')}>S'enregistrer</Button>
             </form>
-            <button onClick={() => navigate('/register')}>S'enregistrer</button>
-
-            <div className="test">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                <div>5</div>
-            </div>
-
-            <div className="popo">
-                <p>fefefefe</p>
-            </div>
         </div>
     );
 };
