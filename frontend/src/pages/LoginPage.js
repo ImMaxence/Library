@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
 import { getCurrentUser } from '../services/userService';
-// import { motion } from 'framer-motion'
-// import { boxVariants } from '../utils/framerMotion'
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -26,19 +24,6 @@ const LoginPage = () => {
             console.log(err);
         }
     };
-
-    const [data, setData] = useState([])
-
-    const handleGetCurrentUser = async () => {
-        try {
-            const currentUser = await getCurrentUser();
-            setData(currentUser)
-            console.log(currentUser)
-        } catch (err) {
-            setError(err)
-            console.log(err)
-        }
-    }
 
     return (
         <div>
@@ -63,7 +48,6 @@ const LoginPage = () => {
             </form>
             <button onClick={() => navigate('/register')}>S'enregistrer</button>
 
-
             <div className="test">
                 <div>1</div>
                 <div>2</div>
@@ -72,7 +56,9 @@ const LoginPage = () => {
                 <div>5</div>
             </div>
 
-            <button onClick={handleGetCurrentUser}>fetch current user info (only if token is present in coockie)</button>
+            <div className="popo">
+                <p>fefefefe</p>
+            </div>
         </div>
     );
 };

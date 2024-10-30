@@ -1,26 +1,2 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-.test {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
-    gap: 60px;
-}
-
-.test div {
-    background-color: red;
-    height: 300px;
-}
-
-.test div:nth-child(even) {
-    background-color: green;
-}
-
-nav {
-    width: 100%;
-    background-color: salmon;
-    padding: 40px;
-}
+@import url('./global.css');
+@import url('./pages/LoginPage.css');

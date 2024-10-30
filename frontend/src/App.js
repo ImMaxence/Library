@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import UserProfile from './pages/UserProfile';
 import ErrorPage from './pages/ErrorPage';
@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <Routes>
