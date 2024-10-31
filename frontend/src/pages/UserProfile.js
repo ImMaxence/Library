@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../services/userService'
+import Layout from '../components/Layout';
 
 const UserProfile = () => {
 
@@ -21,13 +22,13 @@ const UserProfile = () => {
     }
 
     return (
-        <div>
+        <Layout>
             <h1>user profile page</h1>
             {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
             <button onClick={handleGetCurrentUser}>fetch current user info</button>
             {/* {data && <p>{data}</p>} */}
             <button onClick={() => navigate('/')}>back</button>
-        </div>
+        </Layout>
     );
 };
 

@@ -4,10 +4,10 @@
 }
 
 nav {
-    width: 95%;
+    width: calc(100% - 40px);
     position: sticky;
     top: 12px;
-    left: 2.5%;
+    left: 20px;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -17,6 +17,7 @@ nav {
     align-items: center;
     padding: 10px 30px;
     border-radius: 54px;
+    z-index: 300;
 }
 
 .nav_logo {
@@ -28,10 +29,6 @@ nav {
 
 .nav_logo img {
     width: 38px;
-}
-
-.nav_logo h3 {
-    color: var(--text-color) !important;
 }
 
 .nav_right {

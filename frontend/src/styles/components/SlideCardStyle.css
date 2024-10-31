@@ -1,0 +1,6 @@
+.home_slider_next {
+    width: 300px;
+    height: 400px;
+    background-color: var(--background-color);
+    border-radius: 1rem;
+}

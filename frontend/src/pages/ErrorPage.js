@@ -1,15 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Layout from '../components/Layout';
 
 const ErrorPage = () => {
 
     const navigate = useNavigate()
 
     return (
-        <div>
+        <Layout>
             <h1>Error occur</h1>
             <button onClick={() => navigate('/')}>Page home</button>
-        </div>
+        </Layout>
     );
 };
 
