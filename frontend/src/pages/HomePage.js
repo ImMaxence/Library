@@ -7,6 +7,12 @@ import { Button } from 'antd'
 import chevron_left from '../assets/icons/chevron_left.svg'
 import chevron_right from '../assets/icons/chevron_right.svg'
 import SlideCard from '../components/SlideCard';
+import img1 from '../assets/images/slider/img1.png'
+import img2 from '../assets/images/slider/img2.png'
+import img3 from '../assets/images/slider/img3.png'
+import img4 from '../assets/images/slider/img4.png'
+import img5 from '../assets/images/slider/img5.png'
+import img6 from '../assets/images/slider/img6.png'
 
 const HomePage = () => {
 
@@ -57,38 +63,44 @@ const HomePage = () => {
     const slides = [
         {
             id: 1,
-            image: 'image1.jpg',
-            title: 'Titre 1',
+            image: img1,
+            title: '1984',
+            author: 'George Orwell',
             date: '01/01/2024',
         },
         {
             id: 2,
-            image: 'image2.jpg',
-            title: 'Titre 2',
+            image: img2,
+            title: 'Orgueil et préjugés',
+            author: 'Jane Austen',
             date: '02/02/2024',
         },
         {
             id: 3,
-            image: 'image3.jpg',
-            title: 'Titre 3',
+            image: img3,
+            title: 'Hamlet',
+            author: 'William Shakespeare',
             date: '03/03/2024',
         },
         {
             id: 4,
-            image: 'image4.jpg',
-            title: 'Titre 4',
+            image: img4,
+            title: 'Les Mille et Une Nuits',
+            author: 'Anonyme',
             date: '04/04/2024',
         },
         {
             id: 5,
-            image: 'image5.jpg',
-            title: 'Titre 5',
+            image: img5,
+            title: 'Crime et châtiment',
+            author: 'Fiodor Dostoïevski',
             date: '05/05/2024',
         },
         {
             id: 6,
-            image: 'image6.jpg',
-            title: 'Titre 6',
+            image: img6,
+            title: 'Don Quichotte',
+            author: 'Miguel De Cervantes',
             date: '06/06/2024',
         },
     ];
@@ -114,16 +126,17 @@ const HomePage = () => {
                             key={slide.id}
                             image={slide.image}
                             title={slide.title}
+                            author={slide.author}
                             date={slide.date}
                         />
                     ))}
                 </div>
             </header>
             <div className="home_header_wrapper">
-                <div className="home1"></div>
+                {/* <div className="home1"></div>
                 <div className="home2"></div>
                 <div className="home3"></div>
-                <div className="home4"></div>
+                <div className="home4"></div> */}
             </div>
 
 

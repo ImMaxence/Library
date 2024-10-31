@@ -4,6 +4,7 @@ import { Button, Badge, Avatar } from 'antd'
 import logo from '../assets/icons/logo.png'
 import { getFirstLetter } from '../utils/firstLetter'
 import { getCurrentUser } from '../services/userService'
+// import { checkToken } from '../services/authService';
 
 const Navbar = () => {
 
@@ -24,6 +25,19 @@ const Navbar = () => {
         fetchData();
     }, []);
 
+    const handleNavigate = async (route) => {
+
+        navigate(route)
+
+        // try {
+        //     await checkToken();
+        //     console.log("[VERIFY TOKEN NAVBAR] : ✅ Token valide, accès...");
+        //     navigate(route)
+        // } catch (error) {
+        //     console.log("[VERIFY TOKEN NAVBAR] : ❌ Erreur, rediction en cours...");
+        // }
+    }
+
     return (
         <nav>
             <div className="nav_logo">
@@ -33,13 +47,13 @@ const Navbar = () => {
 
             <div className="nav_right">
                 <div className="nav_btn">
-                    <Button type='text' onClick={() => navigate('/home')}>Accueil</Button>
-                    <Button type='text' onClick={() => navigate('/create-book')}>Ajouter un livre</Button>
+                    <Button type='text' onClick={() => handleNavigate('/home')}>Accueil</Button>
+                    <Button type='text' onClick={() => handleNavigate('/create-book')}>Ajouter un livre</Button>
                 </div>
                 <div className="nav_profile">
                     <Badge dot>
                         {data ? (
-                            <Avatar shape='square' size='large' className='avatar' onClick={() => navigate('/profile')}>
+                            <Avatar shape='square' size='large' className='avatar' onClick={() => handleNavigate('/profile')}>
                                 {getFirstLetter(data.username)}
                             </Avatar>
                         ) : (

@@ -6,11 +6,13 @@ import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import CreateBooks from './pages/CreateBooks';
+import Navbar from './components/Navbar';
 
 const App = () => {
 
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<LoginPage />} />
 

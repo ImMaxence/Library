@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { checkToken } from '../services/authService';
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 
 const ProtectedRoute = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -9,6 +9,7 @@ const ProtectedRoute = () => {
     const location = useLocation();
 
     useEffect(() => {
+        setLoading(true)
         const verifyToken = async () => {
             try {
                 const response = await checkToken();
@@ -25,11 +26,10 @@ const ProtectedRoute = () => {
         verifyToken();
     }, [location]);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return '';
 
     return isAuthenticated ? (
         <>
-            <Navbar />
             <Outlet />
         </>
     ) : (
