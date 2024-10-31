@@ -19,6 +19,8 @@ page de connexion et register bouton avec loader
 
 SEO. 
 
-COOCKIE ACCEPT
+COOCKIE ACCEPT. 
+
+license check license library etc
 
 RESPONSIVE MOBILE
