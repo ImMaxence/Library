@@ -17,6 +17,8 @@ la requete login renvoie le nom du user
 
 page de connexion et register bouton avec loader  
 
+corriger navbar  
+=======
 SEO. 
 
 COOCKIE ACCEPT. 
@@ -24,3 +26,4 @@ COOCKIE ACCEPT.
 license check license library etc
 
 RESPONSIVE MOBILE
+
