@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../services/userService'
+import { logout } from '../services/authService';
 import Layout from '../components/Layout';
 
 const UserProfile = () => {
@@ -21,13 +22,24 @@ const UserProfile = () => {
         }
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            await logout();
+            navigate('/')
+        } catch (err) {
+            setError('Error log out');
+            console.log(err);
+        }
+    };
+
     return (
         <Layout>
             <h1>user profile page</h1>
-            {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
             <button onClick={handleGetCurrentUser}>fetch current user info</button>
-            {/* {data && <p>{data}</p>} */}
             <button onClick={() => navigate('/')}>back</button>
+            <button onClick={handleSubmit}>log out</button>
         </Layout>
     );
 };

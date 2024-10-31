@@ -4,7 +4,8 @@
     background-color: var(--background-color);
     padding: 20px;
     position: relative;
-    top: -65px;
+    /* top: -65px; */
     left: 0;
-    padding-top: 100px;
+    /* padding-top: 100px; */
+    /* background-color: red; */
 }

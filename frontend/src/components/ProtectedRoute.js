@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { checkToken } from '../services/authService';
+import Navbar from './Navbar';
+import Footer from './Footer';
 // import Navbar from './Navbar';
 
 const ProtectedRoute = () => {
@@ -30,7 +32,9 @@ const ProtectedRoute = () => {
 
     return isAuthenticated ? (
         <>
+            <Navbar />
             <Outlet />
+            <Footer />
         </>
     ) : (
         <Navigate to="/" />

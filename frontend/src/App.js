@@ -7,12 +7,13 @@ import HomePage from './pages/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import CreateBooks from './pages/CreateBooks';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 const App = () => {
 
   return (
     <BrowserRouter>
-      <Navbar />
+
       <Routes>
         <Route path="/" element={<LoginPage />} />
 
@@ -24,6 +25,7 @@ const App = () => {
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+
     </BrowserRouter>
   );
 };

@@ -1,0 +1,12 @@
+.container_footer {
+    width: calc(100% - 40px);
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    margin-left: 20px;
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: var(--shadow-color);
+    margin-top: 30px;
+}
