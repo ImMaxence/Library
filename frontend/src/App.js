@@ -5,6 +5,7 @@ import UserProfile from './pages/UserProfile';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
+import CreateBooks from './pages/CreateBooks';
 
 const App = () => {
 
@@ -16,6 +17,7 @@ const App = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/create-book" element={<CreateBooks />} />
         </Route>
 
         <Route path="*" element={<ErrorPage />} />

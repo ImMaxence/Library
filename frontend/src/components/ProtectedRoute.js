@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { checkToken } from '../services/authService';
 import Navbar from './Navbar';
 
 const ProtectedRoute = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [loading, setLoading] = useState(true);
+    const location = useLocation();
 
     useEffect(() => {
         const verifyToken = async () => {
@@ -22,8 +23,7 @@ const ProtectedRoute = () => {
         };
 
         verifyToken();
-    }, []);
-
+    }, [location]);
 
     if (loading) return <p>Loading...</p>;
 
