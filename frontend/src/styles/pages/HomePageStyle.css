@@ -82,4 +82,5 @@ header {
     background-color: var(--background-color);
     border-radius: 1rem;
     box-shadow: var(--shadow-color);
+    overflow-y: scroll;
 }

@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { Button, Badge, Avatar } from 'antd'
+import { Button, Badge, Avatar, Spin } from 'antd'
 import logo from '../assets/icons/logo.png'
 import { getFirstLetter } from '../utils/firstLetter'
 import { getCurrentUser } from '../services/userService'
@@ -51,17 +51,20 @@ const Navbar = () => {
                     <Button type='text' onClick={() => handleNavigate('/create-book')}>Ajouter un livre</Button>
                 </div>
                 <div className="nav_profile">
-                    <Badge dot>
-                        {data ? (
+
+                    {data ? (
+                        <Badge dot>
                             <Avatar shape='square' size='large' className='avatar' onClick={() => handleNavigate('/profile')}>
                                 {getFirstLetter(data.username)}
                             </Avatar>
-                        ) : (
-                            <Avatar shape='square' size='large' className='avatar'>
-                                Unknow
-                            </Avatar>
-                        )}
-                    </Badge>
+                        </Badge>
+                    ) : (
+                        // <Avatar shape='square' size='large' className='avatar'>
+                        //     Unknow
+                        // </Avatar>
+                        <Spin />
+                    )}
+
                 </div>
             </div>
         </nav>

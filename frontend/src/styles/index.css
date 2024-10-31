@@ -5,3 +5,4 @@
 @import url('./pages/HomePageStyle.css');
 @import url('./components/SlideCardStyle.css');
 @import url('./components/FooterStyle.css');
+@import url('./components/ProtectedRouteStyle.css');
