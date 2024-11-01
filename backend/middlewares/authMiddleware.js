@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-module.exports = (req, res, next) => {
+module.exports = (requireRole) => (req, res, next) => {
 
     const token = req.cookies.token;
 
@@ -17,6 +17,9 @@ module.exports = (req, res, next) => {
         }
         if (!user) {
             return res.status(403).json({ isAuthenticated: false, message: 'Failed to authenticate token' });
+        }
+        if (user.role < requireRole) {
+            return res.status(403).json({ isAuthenticated: false, message: 'Access denied' });
         }
 
         // Si l'utilisateur est authentifié, ajoutez l'utilisateur à la requête

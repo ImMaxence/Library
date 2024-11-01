@@ -4,9 +4,10 @@ import { Button, Badge, Avatar, Spin } from 'antd'
 import logo from '../assets/icons/logo.png'
 import { getFirstLetter } from '../utils/firstLetter'
 import { getCurrentUser } from '../services/userService'
-// import { checkToken } from '../services/authService';
 
-const Navbar = () => {
+const Navbar = ({ role }) => {
+
+    console.log(role)
 
     const navigate = useNavigate()
     const [data, setData] = useState(null)
@@ -22,20 +23,11 @@ const Navbar = () => {
             }
         };
 
-        fetchData();
+        setTimeout(() => { fetchData(); }, 2000)
     }, []);
 
     const handleNavigate = async (route) => {
-
         navigate(route)
-
-        // try {
-        //     await checkToken();
-        //     console.log("[VERIFY TOKEN NAVBAR] : ✅ Token valide, accès...");
-        //     navigate(route)
-        // } catch (error) {
-        //     console.log("[VERIFY TOKEN NAVBAR] : ❌ Erreur, rediction en cours...");
-        // }
     }
 
     return (
@@ -48,7 +40,7 @@ const Navbar = () => {
             <div className="nav_right">
                 <div className="nav_btn">
                     <Button type='text' onClick={() => handleNavigate('/home')}>Accueil</Button>
-                    <Button type='text' onClick={() => handleNavigate('/create-book')}>Ajouter un livre</Button>
+                    {role === 2 ? <Button type='text' onClick={() => handleNavigate('/back-office')}>Back Office</Button> : null}
                 </div>
                 <div className="nav_profile">
 
@@ -59,10 +51,7 @@ const Navbar = () => {
                             </Avatar>
                         </Badge>
                     ) : (
-                        // <Avatar shape='square' size='large' className='avatar'>
-                        //     Unknow
-                        // </Avatar>
-                        <Spin />
+                        <Spin size='small' />
                     )}
 
                 </div>

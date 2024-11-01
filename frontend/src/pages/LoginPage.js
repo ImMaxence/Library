@@ -14,42 +14,57 @@ const LoginPage = () => {
     const [errorRe, setErrorRe] = useState(null);
     const [show, setShow] = useState(true)
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [loadingRe, setLoadingRe] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (username.length <= 0 || password.length <= 0) {
-            setError('Veuillez rentrer un nom et mot de passe');
-        } else {
-            try {
-                await login({ username, password });
-                setError(null);
-                navigate('/home');
-            } catch (err) {
-                setError('Nom ou mot de passe incorrect');
-                console.log(err);
+        setLoading(true);
+
+        setTimeout(async () => {
+            if (username.length <= 0 || password.length <= 0) {
+                setError('Veuillez rentrer un nom et mot de passe');
+                setLoading(false);
+            } else {
+                try {
+                    await login({ username, password });
+                    setError(null);
+                    navigate('/home');
+                    setLoading(false);
+                } catch (err) {
+                    setError('Nom ou mot de passe incorrect');
+                    console.log(err);
+                    setLoading(false);
+                }
             }
-        }
+        }, 2000)
     };
 
     const handleSubmitRe = async (e) => {
         e.preventDefault();
 
-        console.log(usernameRe, passwordRe)
+        setLoadingRe(true);
 
-        if (usernameRe.length <= 0 || passwordRe.length <= 0 || confirmPasswordRe.length <= 0) {
-            setErrorRe('Veuillez rentrer un nom et mot de passe');
-        } else if (passwordRe !== confirmPasswordRe) {
-            setErrorRe('Les deux mots de passe ne correspondent pas');
-        } else {
-            try {
-                await register({ username: usernameRe, password: passwordRe });
-                setErrorRe('Création avec succès');
-            } catch (err) {
-                setErrorRe('Erreur technique lors de la création du compte');
-                console.log(err);
+        setTimeout(async () => {
+            if (usernameRe.length <= 0 || passwordRe.length <= 0 || confirmPasswordRe.length <= 0) {
+                setErrorRe('Veuillez rentrer un nom et mot de passe');
+                setLoadingRe(false);
+            } else if (passwordRe !== confirmPasswordRe) {
+                setErrorRe('Les deux mots de passe ne correspondent pas');
+                setLoadingRe(false);
+            } else {
+                try {
+                    await register({ username: usernameRe, password: passwordRe });
+                    setErrorRe('Création avec succès');
+                    setLoadingRe(false);
+                } catch (err) {
+                    setErrorRe('Erreur technique lors de la création du compte');
+                    console.log(err);
+                    setLoadingRe(false);
+                }
             }
-        }
+        }, 2000)
     };
 
     return (
@@ -78,7 +93,7 @@ const LoginPage = () => {
                             <Input.Password onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div className="item button">
-                            <Button type="primary" htmlType="submit">Se connecter</Button>
+                            <Button type="primary" loading={loading} htmlType="submit">Se connecter</Button>
                             <Button onClick={() => setShow(false)}>S'enregistrer</Button>
                         </div>
                     </form>
@@ -106,7 +121,7 @@ const LoginPage = () => {
                             <Input.Password onChange={(e) => setConfirmPasswordRe(e.target.value)} />
                         </div>
                         <div className="item button">
-                            <Button type="primary" htmlType="submit">Créer</Button>
+                            <Button type="primary" loading={loadingRe} htmlType="submit">Créer</Button>
                             <Button onClick={() => setShow(true)}>Se connecter</Button>
                         </div>
                     </form>

@@ -11,8 +11,8 @@ exports.getAllBooks = async (req, res, next) => {
 
 exports.addBook = async (req, res, next) => {
     try {
-        const { title, author, genre } = req.body;
-        const book = await Book.create({ title, author, genre });
+        const { title, author, price } = req.body;
+        const book = await Book.create({ title, author, price });
         res.status(201).json({ message: 'Book added successfully', book });
     } catch (error) {
         next(error)

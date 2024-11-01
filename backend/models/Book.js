@@ -11,8 +11,9 @@ const Book = sequelize.define('Book', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    genre: {
-        type: DataTypes.STRING,
+    price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
 });
 

@@ -5,9 +5,7 @@ import UserProfile from './pages/UserProfile';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './components/ProtectedRoute';
-import CreateBooks from './pages/CreateBooks';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import BOPage from './pages/BOPage';
 
 const App = () => {
 
@@ -20,7 +18,7 @@ const App = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/create-book" element={<CreateBooks />} />
+          <Route path="/back-office" element={<BOPage />} />
         </Route>
 
         <Route path="*" element={<ErrorPage />} />
