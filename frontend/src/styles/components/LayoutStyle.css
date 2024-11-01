@@ -1,11 +1,11 @@
 .layout {
     width: 100%;
     height: auto;
-    background-color: var(--background-color);
-    padding: 20px;
+    /* background-color: var(--background-color); */
+    padding: 40px 20px;
     position: relative;
     /* top: -65px; */
     left: 0;
     /* padding-top: 100px; */
-    /* background-color: red; */
+    /* background-color: violet; */
 }

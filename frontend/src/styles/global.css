@@ -112,3 +112,7 @@ a {
 .error {
     color: var(--error-color);
 }
+
+.title {
+    text-decoration: underline;
+}

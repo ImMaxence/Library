@@ -1,8 +1,9 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../services/userService'
 import { logout } from '../services/authService';
 import Layout from '../components/Layout';
+import { Button, Skeleton } from "antd"
 
 const UserProfile = () => {
 
@@ -10,17 +11,24 @@ const UserProfile = () => {
 
     const [error, setError] = useState("")
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    const handleGetCurrentUser = async () => {
-        try {
-            const currentUser = await getCurrentUser();
-            setData(currentUser)
-            console.log(currentUser)
-        } catch (err) {
-            setError(err)
-            console.log(err)
-        }
-    }
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getCurrentUser()
+                setData(response)
+                setLoading(false)
+            } catch (err) {
+                setError(err)
+                setLoading(false)
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        setTimeout(() => { fetchData(); }, 2000);
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,10 +44,17 @@ const UserProfile = () => {
 
     return (
         <Layout>
-            <h1>user profile page</h1>
-            <button onClick={handleGetCurrentUser}>fetch current user info</button>
-            <button onClick={() => navigate('/')}>back</button>
-            <button onClick={handleSubmit}>log out</button>
+            <h1>Votre profil</h1>
+            {error && <p className='error'>{error}</p>}
+            {loading ? (
+                <Skeleton active />
+            ) : (
+                <ul>
+                    <li>id : {data.id}</li>
+                    <li>usernmae : {data.username}</li>
+                </ul>
+            )}
+            <Button type='primary' onClick={handleSubmit}>Se déconecter</Button>
         </Layout>
     );
 };

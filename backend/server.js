@@ -4,7 +4,7 @@ const passport = require('passport');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const bookRoutes = require('./routes/bookRoutes');
-const BORoutes = require('./routes/BORoutes');
+const futurRoutes = require('./routes/futureRoutes')
 const errorMiddleware = require('./middlewares/errorMiddleware');
 const sequelize = require('./config/db');
 const cors = require('cors');
@@ -31,7 +31,7 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/books', bookRoutes);
-app.use('/api/admin', BORoutes);
+app.use('/api/futur', futurRoutes)
 
 app.use(errorMiddleware);
 
@@ -41,7 +41,7 @@ const createAdminUser = async () => {
     const existingAdmin = await User.findOne({ where: { username: adminUsername } });
 
     if (!existingAdmin) {
-        const hashedPassword = await bcrypt.hash(adminPassword, 10);
+        const hashedPassword = bcrypt.hash(adminPassword, 10);
         await User.create({ username: adminUsername, password: hashedPassword, role: 2 });
         console.log(`Admin user created with username: ${adminUsername}`);
     } else {

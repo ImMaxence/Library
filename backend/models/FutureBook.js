@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Book = sequelize.define('Book', {
+const FutureBook = sequelize.define('FutureBook', {
     title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -10,10 +10,10 @@ const Book = sequelize.define('Book', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    price: {
-        type: DataTypes.INTEGER,
+    date: {
+        type: DataTypes.DATE,
         allowNull: false,
     },
 });
 
-module.exports = Book;
+module.exports = FutureBook;
