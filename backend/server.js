@@ -31,7 +31,7 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/books', bookRoutes);
-app.use('/api/futur', futurRoutes)
+app.use('/api/future', futurRoutes)
 
 app.use(errorMiddleware);
 
