@@ -44,7 +44,7 @@ exports.deleteUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { username, password, role } = req.body;
+        const { username, password, role, passwordChanged } = req.body;
 
         const user = await User.findByPk(id);
         if (!user) {
@@ -59,7 +59,7 @@ exports.updateUser = async (req, res, next) => {
             user.username = username;
         }
 
-        if (password) {
+        if (password && passwordChanged) {
             user.password = await bcrypt.hash(password, 10);
         }
 

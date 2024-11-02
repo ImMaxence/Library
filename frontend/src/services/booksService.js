@@ -37,7 +37,7 @@ export const updateBook = async ({ id, title, author, price }) => {
 
 export const deleteBook = async ({ id }) => {
     try {
-        const response = await api.delete(`/api/books/delete_book/${id}`, {})
+        const response = await api.delete(`/api/books/delete-book/${id}`, {})
         return response.data
     } catch (err) {
         throw new Error('Technical error during delete book')

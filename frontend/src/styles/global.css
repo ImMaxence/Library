@@ -116,3 +116,23 @@ a {
 .title {
     text-decoration: underline;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table input {
+    width: 120px;
+}
+
+td,
+th {
+    border: 1px solid var(--accent-color);
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: var(--card-background);
+}

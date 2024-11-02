@@ -17,7 +17,6 @@ const Navbar = ({ role }) => {
             try {
                 const currentUser = await getCurrentUser();
                 setData(currentUser);
-                console.log(currentUser);
             } catch (err) {
                 console.error(err);
             }
