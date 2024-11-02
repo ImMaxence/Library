@@ -67,8 +67,14 @@ exports.updateUser = async (req, res, next) => {
             user.role = role;
         }
 
+        if (req.file) {
+            user.image = req.file.buffer;
+        }
+
         await user.save();
-        res.json({ message: 'User update ok', user });
+        // res.json({ message: 'User update ok', user });
+        const userImageBase64 = user.image ? user.image.toString('base64') : null;
+        res.json({ message: 'User update ok', user, image: userImageBase64 });
     } catch (err) {
         next(err);
     }

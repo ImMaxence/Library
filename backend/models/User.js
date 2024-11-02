@@ -14,6 +14,10 @@ const User = sequelize.define('User', {
     role: {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    image: {
+        type: DataTypes.BLOB,
+        allowNull: true,
     }
 });
 

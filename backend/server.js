@@ -41,8 +41,8 @@ const createAdminUser = async () => {
     const existingAdmin = await User.findOne({ where: { username: adminUsername } });
 
     if (!existingAdmin) {
-        const hashedPassword = bcrypt.hash(adminPassword, 10);
-        await User.create({ username: adminUsername, password: hashedPassword, role: 2 });
+        const hashedPassword = await bcrypt.hash(adminPassword, 10);
+        await User.create({ username: adminUsername, password: hashedPassword, role: 2, image: null });
         console.log(`Admin user created with username: ${adminUsername}`);
     } else {
         console.log(`Admin user already exists with username: ${adminUsername}`);
