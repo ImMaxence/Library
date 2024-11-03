@@ -28,12 +28,23 @@ exports.getUserProfile = async (req, res, next) => {
 
 exports.getAllUser = async (req, res, next) => {
     try {
-        const user = await User.findAll()
-        res.json(user);
+        const users = await User.findAll({ attributes: ['id', 'username', 'role', 'image', 'password'] });
+
+        // si user à une image alors convertir en base64
+        const usersWithImages = users.map(user => {
+            if (user.image && Buffer.isBuffer(user.image)) {
+                console.log(`Converting image for user ${user.id} to Base64`);
+                const imageBase64 = user.image.toString('base64');
+                user.image = `data:image/jpeg;base64,${imageBase64}`;
+            }
+            return user;
+        });
+
+        res.json(usersWithImages);
     } catch (err) {
-        next(err)
+        next(err);
     }
-}
+};
 
 exports.deleteUser = async (req, res, next) => {
     try {

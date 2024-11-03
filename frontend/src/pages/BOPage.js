@@ -45,6 +45,9 @@ const BOPage = () => {
     const [date, setDate] = useState('')
     const [errorCreateFu, setErrorCreateFu] = useState('')
 
+    const [userImages, setUserImages] = useState({}); // local
+    const [userFiles, setUserFiles] = useState({});
+
     const [trigger, setTrigger] = useState(false)
 
     useEffect(() => {
@@ -53,6 +56,7 @@ const BOPage = () => {
                 const getContent = await getAllUser();
                 setUsers(getContent);
                 setFilteredUsers(getContent);
+                console.log(getContent)
             } catch (err) {
                 setErrorUser(err.message);
             } finally {
@@ -218,6 +222,15 @@ const BOPage = () => {
         }, 2000)
     };
 
+    const handleFileChange = (id, e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setUserFiles(prevFiles => ({ ...prevFiles, [id]: file }));
+            const fileURL = URL.createObjectURL(file);
+            setUserImages(prevImages => ({ ...prevImages, [id]: fileURL }));
+        }
+    };
+
     return (
         <Layout>
             <div className='bo_container'>
@@ -235,7 +248,7 @@ const BOPage = () => {
                     <h4 className='title'>Créer un user</h4>
                     <form onSubmit={handleSubmitRe}>
                         {errorRe && <p className='error'>{errorRe}</p>}
-                        <p>Username</p>
+                        <p>USERNAME</p>
                         <Input type='text' onChange={(e) => setUsernameRe(e.target.value)} />
                         <p>Password</p>
                         <Input type='password' onChange={(e) => setPasswordRe(e.target.value)} />
@@ -260,6 +273,7 @@ const BOPage = () => {
                                     <th>USERNAME</th>
                                     <th>ROLE</th>
                                     <th>MDP</th>
+                                    <th>IMAGE</th>
                                     <th>ACTIONS</th>
                                 </tr>
                             </thead>
@@ -270,6 +284,15 @@ const BOPage = () => {
                                         <td><input type="text" value={item.username} onChange={(e) => onChangeUserField(item.id, 'username', e.target.value)} /></td>
                                         <td><input type="number" max={2} min={1} value={item.role} onChange={(e) => onChangeUserField(item.id, 'role', e.target.value)} /></td>
                                         <td><input type="password" value={item.password} onChange={(e) => onChangeUserField(item.id, 'password', e.target.value)} /></td>
+                                        <td>
+                                            {/* Display current image or new selected image */}
+                                            {userImages[item.id] ? (
+                                                <img src={userImages[item.id]} alt="Profile Preview" style={{ width: 100, height: 100 }} />
+                                            ) : (
+                                                <img src={item.image} alt="Profile" style={{ width: 100, height: 100 }} />
+                                            )}
+                                            <input type="file" accept="image/*" onChange={(e) => handleFileChange(item.id, e)} />
+                                        </td>
                                         <td>
                                             <UpdateBO id={item.id} type="user" username={item.username} role={item.role} password={item.password} passwordChanged={item.passwordChanged || false} />
                                             <PopconfirmBO id={item.id} type="user" />
