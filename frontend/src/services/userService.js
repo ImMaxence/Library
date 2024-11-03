@@ -18,13 +18,14 @@ export const getAllUser = async () => {
     }
 }
 
-export const updateUser = async ({ id, username, password, role, passwordChanged }) => {
+export const updateUser = async ({ id, username, password, role, passwordChanged, image }) => {
     try {
         const response = await api.put(`/api/users/update-user/${id}`, {
             username,
             password,
             role,
-            passwordChanged
+            passwordChanged,
+            image
         })
         return response.data
     } catch (err) {

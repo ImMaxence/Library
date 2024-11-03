@@ -130,7 +130,6 @@ const BOPage = () => {
         );
     };
 
-
     const onChangeBookField = (id, field, value) => {
         setFilteredBooks(prevBooks =>
             prevBooks.map(book =>

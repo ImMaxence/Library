@@ -4,7 +4,7 @@ import { updateBook } from '../services/booksService';
 import { updateFutureBook } from '../services/futureService';
 import { updateUser } from '../services/userService';
 
-const UpdateBO = ({ id, type, username, password, role, title, author, price, date, passwordChanged }) => {
+const UpdateBO = ({ id, type, username, password, role, title, author, price, date, passwordChanged, image }) => {
 
     const [loading, setLoading] = useState(false);
 
@@ -15,8 +15,7 @@ const UpdateBO = ({ id, type, username, password, role, title, author, price, da
         setTimeout(async () => {
             if (type === "user") {
                 setLoading(false)
-                console.log(passwordChanged)
-                await updateUser({ id: id, username: username, password: password, role: role, passwordChanged: passwordChanged })
+                await updateUser({ id: id, username: username, password: password, role: role, passwordChanged: passwordChanged, image: image })
             } else if (type === "book") {
                 setLoading(false)
                 await updateBook({ id: id, title: title, author: author, price: price })

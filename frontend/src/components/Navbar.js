@@ -44,11 +44,28 @@ const Navbar = ({ role }) => {
                 <div className="nav_profile">
 
                     {data ? (
-                        <Badge dot>
-                            <Avatar shape='square' size='large' className='avatar' onClick={() => handleNavigate('/profile')}>
-                                {getFirstLetter(data.username)}
-                            </Avatar>
-                        </Badge>
+                        data.image ? (
+                            <Badge dot>
+                                <Avatar
+                                    shape='square'
+                                    size='large'
+                                    className='avatar'
+                                    src={data.image}
+                                    onClick={() => handleNavigate('/profile')}
+                                />
+                            </Badge>
+                        ) : (
+                            <Badge dot>
+                                <Avatar
+                                    shape='square'
+                                    size='large'
+                                    className='avatar'
+                                    onClick={() => handleNavigate('/profile')}
+                                >
+                                    {getFirstLetter(data.username)}
+                                </Avatar>
+                            </Badge>
+                        )
                     ) : (
                         <Spin size='small' />
                     )}
