@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 // get user connecté
 exports.getUserProfile = async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.user.id, { attributes: ['id', 'username', 'password', 'image'] });
+        const user = await User.findByPk(req.user.id, { attributes: ['id', 'username', 'password', 'role', 'image'] });
 
         if (!user) {
             return next({ status: 404, message: 'User not found' });
@@ -64,7 +64,7 @@ exports.updateUser = async (req, res, next) => {
         if (username && username !== user.username) {
             const existingUser = await User.findOne({ where: { username } });
             if (existingUser) {
-                return next({ status: 409, message: 'Take an another name, already take' });
+                return next({ status: 409, message: 'Username already taken' });
             }
             user.username = username;
         }
@@ -78,19 +78,14 @@ exports.updateUser = async (req, res, next) => {
         }
 
         if (req.file) {
-            console.log("Image found, converting to Base64 UPDATEUSER");
-            const imageBase64 = user.image.toString('base64');
-            const imageSrc = `data:image/jpeg;base64,${imageBase64}`; // pour le front
-
-            user.image = imageSrc;
-        } else {
-            console.log("No image found for the user");
+            console.log("Image found, saving as binary");
+            user.image = req.file.buffer;
         }
 
         await user.save();
-
-        res.json({ message: 'User update ok', user });
+        res.json({ message: 'User updated successfully', user });
     } catch (err) {
+        console.error('Error details UPDATE USER:', err);
         next(err);
     }
 };

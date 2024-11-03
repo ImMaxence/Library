@@ -16,6 +16,7 @@ const UserProfile = () => {
     const [oldPassword, setOldPassword] = useState("");
     const [image, setImage] = useState(null);
     const [file, setFile] = useState(null)
+    const [role, setRole] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,6 +28,7 @@ const UserProfile = () => {
                 setOldPassword(response.password);
                 setPassword(response.password);
                 setImage(response.image);
+                setRole(response.role)
                 setLoading(false);
             } catch (err) {
                 setError('Failed to load user data');
@@ -51,12 +53,12 @@ const UserProfile = () => {
     const handleUpdateUser = async () => {
         const passwordChanged = password && password !== oldPassword;
         setError('');
-        console.log(file);
         try {
             await updateUser({
                 id: data.id,
                 username: username,
                 password: password,
+                role: role,
                 passwordChanged: passwordChanged,
                 image: file,
             });
@@ -65,6 +67,7 @@ const UserProfile = () => {
             setError('Failed to update profile');
         }
     };
+
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
