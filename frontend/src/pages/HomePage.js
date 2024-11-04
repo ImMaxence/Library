@@ -9,7 +9,6 @@ import { getAllFutureBooks } from '../services/futureService';
 import CardBook from '../components/CardBook';
 
 const HomePage = () => {
-    const [error, setError] = useState(null);
     const [dataBooks, setDataBooks] = useState([]);
     const [dataFuture, setDataFuture] = useState([]);
     const [filters, setFilters] = useState({ title: '', author: '', minPrice: null, maxPrice: null });
@@ -35,7 +34,7 @@ const HomePage = () => {
             setDataBooks(res);
             console.log(res)
         } catch (err) {
-            setError(err.message);
+            console.log(err)
         }
     };
 

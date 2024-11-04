@@ -1,0 +1,601 @@
+{
+	"info": {
+		"_postman_id": "c372877f-5b33-4ed9-ae6a-93f77451668c",
+		"name": "library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34437979"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"bb\",\n  \"password\": \"bb\",\n  \"role\":2\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Récupère tous les cookies de la réponse",
+							"const cookies = pm.response.headers.get('Set-Cookie');",
+							"",
+							"// Utilise une expression régulière pour trouver le token dans le cookie",
+							"const token = cookies.match(/token=([^;]+)/)[1];",
+							"",
+							"// Sauvegarde le token dans une variable d'environnement",
+							"pm.environment.set(\"token\", token);",
+							"",
+							"console.log(\"DDDNJOEDNJENDJKENDJNEJ\")",
+							"console.log(cookies)",
+							"console.log(token)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"admin_user_default\",\n  \"password\": \"password_1713\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/maxencebonnici/Downloads/IMG_3115 - Moyenne.jpeg"
+						},
+						{
+							"key": "title",
+							"value": "Test",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "auth",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "43",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/books/create-book",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"books",
+						"create-book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create future",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/maxencebonnici/Downloads/IMG_3070 - Moyenne.jpeg"
+						},
+						{
+							"key": "title",
+							"value": "Test",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "auth",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "2024-11-04 15:12:01.792 +0100",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/future/create-book",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"future",
+						"create-book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get books",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/books/get-all",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"books",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get books with params",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/books/get-all?title=Musique&author=Maxence&minPrice=20&maxPrice=40",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"books",
+						"get-all"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Musique"
+						},
+						{
+							"key": "author",
+							"value": "Maxence"
+						},
+						{
+							"key": "minPrice",
+							"value": "20"
+						},
+						{
+							"key": "maxPrice",
+							"value": "40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get future",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/books/get-all",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"books",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get current user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/users/profile",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/users/get-all",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verfiy token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/auth/verify-token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"verify-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "up user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"maxfUPDATE\",\n  \"password\": \"maxfUPDATE\",\n  \"role\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/users/update-user/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"update-user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "up book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/maxencebonnici/Downloads/IMG_3070 - Moyenne.jpeg"
+						},
+						{
+							"key": "title",
+							"value": "update title",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "update aut",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "65",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/books/update-book/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"books",
+						"update-book",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "up book Copy",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/maxencebonnici/Downloads/IMG_3115 - Moyenne.jpeg"
+						},
+						{
+							"key": "title",
+							"value": "update title",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "maxence update",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "2025-11-04 15:12:01.792 +0100",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/future/update-book/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"future",
+						"update-book",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "del future",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/future/delete-book/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"future",
+						"delete-book",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}

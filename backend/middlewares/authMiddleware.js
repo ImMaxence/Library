@@ -8,7 +8,6 @@ module.exports = (requireRole) => (req, res, next) => {
         return next({ status: 401, message: 'No token provided' });
     }
 
-    // Ajoute le token au header Authorization pour que Passport puisse l'utiliser
     req.headers.authorization = `Bearer ${token}`;
 
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
@@ -22,7 +21,6 @@ module.exports = (requireRole) => (req, res, next) => {
             return res.status(403).json({ isAuthenticated: false, message: 'Access denied' });
         }
 
-        // Si l'utilisateur est authentifié, ajoutez l'utilisateur à la requête
         req.user = user;
         next();
     })(req, res, next);

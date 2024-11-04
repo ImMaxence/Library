@@ -312,7 +312,6 @@ const BOPage = () => {
                                         <td><input type="number" max={2} min={1} value={item.role} onChange={(e) => onChangeUserField(item.id, 'role', e.target.value)} /></td>
                                         <td><input type="password" value={item.password} onChange={(e) => onChangeUserField(item.id, 'password', e.target.value)} /></td>
                                         <td>
-                                            {/* Display current image or new selected image */}
                                             {userImages[item.id] ? (
                                                 <img src={userImages[item.id]} alt="Profile Preview" style={{ width: 100, height: 100 }} />
                                             ) : (
@@ -387,7 +386,7 @@ const BOPage = () => {
                                             <input type="file" accept="image/*" onChange={(e) => handleFileChangeBook(item.id, e)} />
                                         </td>
                                         <td>
-                                            <UpdateBO id={item.id} type="book" title={item.title} author={item.author} price={item.price} />
+                                            <UpdateBO id={item.id} type="book" title={item.title} author={item.author} price={item.price} image={bookFiles} />
                                             <PopconfirmBO id={item.id} type="book" />
                                         </td>
                                     </tr>
@@ -444,7 +443,6 @@ const BOPage = () => {
                                         <td><input type="text" value={item.author} onChange={(e) => onChangeFutureBookField(item.id, 'author', e.target.value)} /></td>
                                         <td><input type="date" value={new Date(item.date).toISOString().slice(0, 10)} onChange={(e) => onChangeFutureBookField(item.id, 'date', e.target.value)} /></td>
                                         <td>
-                                            {/* Display current image or new selected image */}
                                             {futureImages[item.id] ? (
                                                 <img src={futureImages[item.id]} alt="Preview" style={{ width: 100, height: 100 }} />
                                             ) : (
@@ -453,7 +451,7 @@ const BOPage = () => {
                                             <input type="file" accept="image/*" onChange={(e) => handleFileChangeFuture(item.id, e)} />
                                         </td>
                                         <td>
-                                            <UpdateBO id={item.id} type="future" title={item.title} author={item.author} date={item.date} />
+                                            <UpdateBO id={item.id} type="future" title={item.title} author={item.author} date={item.date} image={futurFiles} />
                                             <PopconfirmBO id={item.id} type="future" />
                                         </td>
                                     </tr>

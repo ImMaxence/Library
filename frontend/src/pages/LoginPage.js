@@ -76,7 +76,6 @@ const LoginPage = () => {
                 </div>
             </div>
 
-            {/* Login Form */}
             <div className={`login_wrapper ${!show ? 'hidden' : ''}`}>
                 <div className="login_part2">
                     <div>
@@ -100,7 +99,6 @@ const LoginPage = () => {
                 </div>
             </div>
 
-            {/* Registration Form */}
             <div className={`login_wrapper ${!show ? '' : 'hidden'}`}>
                 <div className="login_part2">
                     <div>

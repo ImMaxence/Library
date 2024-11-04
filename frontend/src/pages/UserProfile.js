@@ -74,7 +74,7 @@ const UserProfile = () => {
         if (file) {
             setFile(file);
             const fileURL = URL.createObjectURL(file);
-            setImage(fileURL); // URL de l'image local
+            setImage(fileURL); // local
         }
     };
 
