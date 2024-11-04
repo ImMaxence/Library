@@ -9,12 +9,18 @@ export const getAllBooks = async () => {
     }
 };
 
-export const addBook = async ({ title, author, price }) => {
+export const addBook = async ({ title, author, price, image }) => {
     try {
-        const response = await api.post('/api/books/create-book', {
-            title,
-            author,
-            price
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('author', author)
+        formData.append('price', price)
+        formData.append('image', image)
+
+        const response = await api.post(`/api/books/create-book`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
         });
         return response.data;
     } catch (error) {
@@ -22,14 +28,20 @@ export const addBook = async ({ title, author, price }) => {
     }
 };
 
-export const updateBook = async ({ id, title, author, price }) => {
+export const updateBook = async ({ id, title, author, price, image }) => {
     try {
-        const response = await api.put(`/api/books/update-book/${id}`, {
-            title,
-            author,
-            price
-        })
-        return response.data
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('author', author)
+        formData.append('price', price)
+        formData.append('image', image)
+
+        const response = await api.put(`/api/books/update-book/${id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        return response.data;
     } catch (err) {
         throw new Error('Technical error during update book')
     }

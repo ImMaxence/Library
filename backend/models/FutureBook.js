@@ -14,6 +14,10 @@ const FutureBook = sequelize.define('FutureBook', {
         type: DataTypes.DATE,
         allowNull: false,
     },
+    image: {
+        type: DataTypes.BLOB,
+        allowNull: false,
+    }
 });
 
 module.exports = FutureBook;

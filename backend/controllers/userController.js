@@ -89,7 +89,7 @@ exports.updateUser = async (req, res, next) => {
         }
 
         if (req.file) {
-            console.log("Image found, saving as binary");
+            console.log("Image found USER, saving as binary");
             user.image = req.file.buffer;
         }
 

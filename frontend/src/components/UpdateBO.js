@@ -15,13 +15,14 @@ const UpdateBO = ({ id, type, username, password, role, title, author, price, da
         setTimeout(async () => {
             if (type === "user") {
                 setLoading(false)
+                console.log("UPDATE BO USER : ", image)
                 await updateUser({ id: id, username: username, password: password, role: role, passwordChanged: passwordChanged, image: image })
             } else if (type === "book") {
                 setLoading(false)
-                await updateBook({ id: id, title: title, author: author, price: price })
+                await updateBook({ id: id, title: title, author: author, price: price, image: image })
             } else if (type === "future") {
                 setLoading(false)
-                await updateFutureBook({ id: id, title: title, author: author, date: date })
+                await updateFutureBook({ id: id, title: title, author: author, date: date, image: image })
             } else {
                 setLoading(false)
                 throw new Error('Update button need a type')

@@ -18,40 +18,28 @@ export const getAllUser = async () => {
     }
 }
 
-// export const updateUser = async ({ id, username, password, role, passwordChanged, image }) => {
-//     try {
-//         const response = await api.put(`/api/users/update-user/${id}`, {
-//             username,
-//             password,
-//             role,
-//             passwordChanged,
-//             image
-//         })
-//         return response.data
-//     } catch (err) {
-//         throw new Error('Technical error during update user')
-//     }
-// }
-
 export const updateUser = async ({ id, username, password, role, passwordChanged, image }) => {
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
-    formData.append('role', role || '1'); // ajouter une valeur par défaut si `role` est undefined
-    formData.append('passwordChanged', passwordChanged);
-    if (image) {
-        formData.append('image', image);
-    }
-
-    const response = await api.put(`/api/users/update-user/${id}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
+    try {
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('role', role || '1'); // role 1 si undifined
+        formData.append('passwordChanged', passwordChanged);
+        if (image) {
+            formData.append('image', image);
         }
-    });
-    return response.data;
+
+        const response = await api.put(`/api/users/update-user/${id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        return response.data;
+    } catch (err) {
+        console.log(err)
+        throw new Error('Error dont update user')
+    }
 };
-
-
 
 export const deleteUser = async ({ id }) => {
     try {

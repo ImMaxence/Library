@@ -48,6 +48,15 @@ const BOPage = () => {
     const [userImages, setUserImages] = useState({}); // local
     const [userFiles, setUserFiles] = useState({});
 
+    const [bookImages, setBookImages] = useState({}); // local
+    const [bookFiles, setBookFiles] = useState({});
+
+    const [futureImages, setFutureImages] = useState({}); // local
+    const [futurFiles, setFutureFiles] = useState({});
+
+    const [fileCreateBook, setFileCreateBook] = useState({})
+    const [fileCreateFuture, setFileCreateFuture] = useState({})
+
     const [trigger, setTrigger] = useState(false)
 
     useEffect(() => {
@@ -181,12 +190,12 @@ const BOPage = () => {
         setErrorCreateBook('')
 
         setTimeout(async () => {
-            if (title.length <= 0 || author.length <= 0 || price.length <= 0) {
+            if (title.length <= 0 || author.length <= 0 || price.length <= 0 || fileCreateBook <= 0) {
                 setErrorCreateBook('Veuillez rentrer tous les champs');
                 setLoadingCreateBook(false);
             } else {
                 try {
-                    await addBook({ title: title, author: author, price: price });
+                    await addBook({ title: title, author: author, price: price, image: fileCreateBook });
                     setErrorCreateBook('Création avec succès');
                     setLoadingCreateBook(false);
                 } catch (err) {
@@ -205,12 +214,12 @@ const BOPage = () => {
         setErrorCreateFu('')
 
         setTimeout(async () => {
-            if (titleFu.length <= 0 || authorFu.length <= 0 || date.length <= 0) {
+            if (titleFu.length <= 0 || authorFu.length <= 0 || date.length <= 0 || fileCreateFuture <= 0) {
                 setErrorCreateBook('Veuillez rentrer tous les champs');
                 setLoadingCreateFu(false);
             } else {
                 try {
-                    await createFutureBook({ title: titleFu, author: authorFu, date: date });
+                    await createFutureBook({ title: titleFu, author: authorFu, date: date, image: fileCreateFuture });
                     setErrorCreateFu('Création avec succès');
                     setLoadingCreateFu(false);
                 } catch (err) {
@@ -222,12 +231,30 @@ const BOPage = () => {
         }, 2000)
     };
 
-    const handleFileChange = (id, e) => {
+    const handleFileChangeUser = (id, e) => {
         const file = e.target.files[0];
         if (file) {
-            setUserFiles(prevFiles => ({ ...prevFiles, [id]: file }));
+            setUserFiles(file);
             const fileURL = URL.createObjectURL(file);
             setUserImages(prevImages => ({ ...prevImages, [id]: fileURL }));
+        }
+    };
+
+    const handleFileChangeBook = (id, e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setBookFiles(file);
+            const fileURL = URL.createObjectURL(file);
+            setBookImages(prevImages => ({ ...prevImages, [id]: fileURL }));
+        }
+    };
+
+    const handleFileChangeFuture = (id, e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFutureFiles(file);
+            const fileURL = URL.createObjectURL(file);
+            setFutureImages(prevImages => ({ ...prevImages, [id]: fileURL }));
         }
     };
 
@@ -291,10 +318,10 @@ const BOPage = () => {
                                             ) : (
                                                 <img src={item.image} alt="Profile" style={{ width: 100, height: 100 }} />
                                             )}
-                                            <input type="file" accept="image/*" onChange={(e) => handleFileChange(item.id, e)} />
+                                            <input type="file" accept="image/*" onChange={(e) => handleFileChangeUser(item.id, e)} />
                                         </td>
                                         <td>
-                                            <UpdateBO id={item.id} type="user" username={item.username} role={item.role} password={item.password} passwordChanged={item.passwordChanged || false} />
+                                            <UpdateBO id={item.id} type="user" username={item.username} role={item.role} password={item.password} passwordChanged={item.passwordChanged || false} image={userFiles} />
                                             <PopconfirmBO id={item.id} type="user" />
                                         </td>
                                     </tr>
@@ -317,6 +344,8 @@ const BOPage = () => {
                         <Input type='text' onChange={(e) => setAuthor(e.target.value)} />
                         <p>PRICE</p>
                         <Input type='number' onChange={(e) => setPrice(e.target.value)} />
+                        <p>IMAGE</p>
+                        <Input type='file' accept="image/*" onChange={(e) => setFileCreateBook(e.target.files[0])} />
                         <Button type="primary" loading={loadingCreateBook} htmlType="submit">Créer</Button>
                     </form>
                     <Search
@@ -337,6 +366,7 @@ const BOPage = () => {
                                     <th>TITLE</th>
                                     <th>AUTHOR</th>
                                     <th>PRICE</th>
+                                    <th>IMAGE</th>
                                     <th>ACTIONS</th>
                                 </tr>
                             </thead>
@@ -348,7 +378,16 @@ const BOPage = () => {
                                         <td><input type="text" value={item.author} onChange={(e) => onChangeBookField(item.id, 'author', e.target.value)} /></td>
                                         <td><input type="number" value={item.price} onChange={(e) => onChangeBookField(item.id, 'price', e.target.value)} /></td>
                                         <td>
-                                            <UpdateBO id={item.id} type="book" title={item.title} price={item.price} />
+                                            {/* Display current image or new selected image */}
+                                            {bookImages[item.id] ? (
+                                                <img src={bookImages[item.id]} alt="Preview" style={{ width: 100, height: 100 }} />
+                                            ) : (
+                                                <img src={item.image} alt="img" style={{ width: 100, height: 100 }} />
+                                            )}
+                                            <input type="file" accept="image/*" onChange={(e) => handleFileChangeBook(item.id, e)} />
+                                        </td>
+                                        <td>
+                                            <UpdateBO id={item.id} type="book" title={item.title} author={item.author} price={item.price} />
                                             <PopconfirmBO id={item.id} type="book" />
                                         </td>
                                     </tr>
@@ -371,6 +410,8 @@ const BOPage = () => {
                         <Input type='text' onChange={(e) => setAuthorFu(e.target.value)} />
                         <p>DATE</p>
                         <Input type='date' onChange={(e) => setDate(e.target.value)} />
+                        <p>IMAGE</p>
+                        <Input type='file' accept="image/*" onChange={(e) => setFileCreateFuture(e.target.files[0])} />
                         <Button type="primary" loading={loadingCreateFu} htmlType="submit">Créer</Button>
                     </form>
                     <Search
@@ -391,6 +432,7 @@ const BOPage = () => {
                                     <th>TITLE</th>
                                     <th>AUTHOR</th>
                                     <th>DATE</th>
+                                    <th>IMAGE</th>
                                     <th>ACTIONS</th>
                                 </tr>
                             </thead>
@@ -401,6 +443,15 @@ const BOPage = () => {
                                         <td><input type="text" value={item.title} onChange={(e) => onChangeFutureBookField(item.id, 'title', e.target.value)} /></td>
                                         <td><input type="text" value={item.author} onChange={(e) => onChangeFutureBookField(item.id, 'author', e.target.value)} /></td>
                                         <td><input type="date" value={new Date(item.date).toISOString().slice(0, 10)} onChange={(e) => onChangeFutureBookField(item.id, 'date', e.target.value)} /></td>
+                                        <td>
+                                            {/* Display current image or new selected image */}
+                                            {futureImages[item.id] ? (
+                                                <img src={futureImages[item.id]} alt="Preview" style={{ width: 100, height: 100 }} />
+                                            ) : (
+                                                <img src={item.image} alt="img" style={{ width: 100, height: 100 }} />
+                                            )}
+                                            <input type="file" accept="image/*" onChange={(e) => handleFileChangeFuture(item.id, e)} />
+                                        </td>
                                         <td>
                                             <UpdateBO id={item.id} type="future" title={item.title} author={item.author} date={item.date} />
                                             <PopconfirmBO id={item.id} type="future" />

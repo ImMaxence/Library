@@ -12,7 +12,7 @@ const resizeImage = async (req, res, next) => {
     try {
         // redimensionne et compresse l'image avec sharp
         req.file.buffer = await sharp(req.file.buffer)
-            .resize(150, 150) // Dimensions en pixels
+            .resize(300, 300) // Dimensions en pixels
             .jpeg({ quality: 80 }) // Compresse avec qualité 80
             .rotate() // EXFIX
             .toBuffer();
