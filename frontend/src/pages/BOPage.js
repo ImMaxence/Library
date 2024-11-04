@@ -271,17 +271,17 @@ const BOPage = () => {
                 />
 
                 <section>
-                    <h3 className='title'>Gestion des utilisateurs</h3>
-                    <h4 className='title'>Créer un user</h4>
+                    <h3 className='title'>Users manage</h3>
+                    <h4 className='title'>Create user</h4>
                     <form onSubmit={handleSubmitRe}>
                         {errorRe && <p className='error'>{errorRe}</p>}
                         <p>USERNAME</p>
                         <Input type='text' onChange={(e) => setUsernameRe(e.target.value)} />
-                        <p>Password</p>
+                        <p>PASSWORD</p>
                         <Input type='password' onChange={(e) => setPasswordRe(e.target.value)} />
-                        <Button type="primary" loading={loadingRe} htmlType="submit">Créer</Button>
+                        <Button type="primary" loading={loadingRe} htmlType="submit">CREATE</Button>
                     </form>
-                    <h4 className='title'>Modifier - Supprimer un user</h4>
+                    <h4 className='title'>Update - Delete user</h4>
                     <Search
                         placeholder="Username"
                         onSearch={(value) => onSearchUser(value, 'username')}
@@ -328,13 +328,13 @@ const BOPage = () => {
                             </tbody>
                         </table>
                     ) : (
-                        <p>Pas de données</p>
+                        <p>No data</p>
                     )}
                 </section>
 
                 <section>
-                    <h3 className='title'>Gestion des livres</h3>
-                    <h4 className='title'>Créer un livre</h4>
+                    <h3 className='title'>Books manage</h3>
+                    <h4 className='title'>Create book</h4>
                     <form onSubmit={handleSubmitCreateBook}>
                         {errorCreateBook && <p className='error'>{errorCreateBook}</p>}
                         <p>TITLE</p>
@@ -345,7 +345,7 @@ const BOPage = () => {
                         <Input type='number' onChange={(e) => setPrice(e.target.value)} />
                         <p>IMAGE</p>
                         <Input type='file' accept="image/*" onChange={(e) => setFileCreateBook(e.target.files[0])} />
-                        <Button type="primary" loading={loadingCreateBook} htmlType="submit">Créer</Button>
+                        <Button type="primary" loading={loadingCreateBook} htmlType="submit">Create</Button>
                     </form>
                     <Search
                         placeholder="Title"
@@ -377,7 +377,6 @@ const BOPage = () => {
                                         <td><input type="text" value={item.author} onChange={(e) => onChangeBookField(item.id, 'author', e.target.value)} /></td>
                                         <td><input type="number" value={item.price} onChange={(e) => onChangeBookField(item.id, 'price', e.target.value)} /></td>
                                         <td>
-                                            {/* Display current image or new selected image */}
                                             {bookImages[item.id] ? (
                                                 <img src={bookImages[item.id]} alt="Preview" style={{ width: 100, height: 100 }} />
                                             ) : (
@@ -394,13 +393,13 @@ const BOPage = () => {
                             </tbody>
                         </table>
                     ) : (
-                        <p>Pas de données</p>
+                        <p>No data</p>
                     )}
                 </section>
 
                 <section>
-                    <h3 className='title'>Gestion futur ajouts</h3>
-                    <h4 className='title'>Créer un livre futur</h4>
+                    <h3 className='title'>Manage future</h3>
+                    <h4 className='title'>Create future</h4>
                     <form onSubmit={handleSubmitCreateFu}>
                         {errorCreateFu && <p className='error'>{errorCreateFu}</p>}
                         <p>TITLE</p>
@@ -411,7 +410,7 @@ const BOPage = () => {
                         <Input type='date' onChange={(e) => setDate(e.target.value)} />
                         <p>IMAGE</p>
                         <Input type='file' accept="image/*" onChange={(e) => setFileCreateFuture(e.target.files[0])} />
-                        <Button type="primary" loading={loadingCreateFu} htmlType="submit">Créer</Button>
+                        <Button type="primary" loading={loadingCreateFu} htmlType="submit">Create</Button>
                     </form>
                     <Search
                         placeholder="Title"
@@ -459,7 +458,7 @@ const BOPage = () => {
                             </tbody>
                         </table>
                     ) : (
-                        <p>Pas de données</p>
+                        <p>No data</p>
                     )}
                 </section>
             </div>

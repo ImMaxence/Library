@@ -7,8 +7,6 @@ import { getCurrentUser } from '../services/userService'
 
 const Navbar = ({ role }) => {
 
-    console.log(role)
-
     const navigate = useNavigate()
     const [data, setData] = useState(null)
 

@@ -80,7 +80,7 @@ const UserProfile = () => {
 
     return (
         <Layout>
-            <h1>Your Profile</h1>
+            <h1 style={{ marginBottom: 30 }}>Your Profile</h1>
             {error && <p className='error'>{error}</p>}
             {loading ? (
                 <Skeleton active />
@@ -93,24 +93,29 @@ const UserProfile = () => {
                             {getFirstLetter(username)}
                         </Avatar>
                     )}
-                    <p>Change Profile Picture</p>
-                    <input type='file' accept="image/*" onChange={handleFileChange} />
-                    <p>Your Name</p>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <p>Your Password</p>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <Button type='primary' onClick={handleUpdateUser}>Update</Button>
+                    <div className="up_content">
+                        <p>Nouvelle photo de profil</p>
+                        <input type='file' accept="image/*" onChange={handleFileChange} />
+                        <p>Nouveau nom</p>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <p>Nouveau mot de passe</p>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <div style={{ marginTop: 30, marginBottom: 30 }}>
+                            <Button type='primary' onClick={handleUpdateUser}>Mettre à jour</Button>
+                        </div>
+
+                    </div>
                 </>
             )}
-            <Button type='primary' onClick={handleLogOut}>Log Out</Button>
+            <Button type='primary' onClick={handleLogOut}>Se déconnecter</Button>
         </Layout>
     );
 };
