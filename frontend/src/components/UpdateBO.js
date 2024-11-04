@@ -15,7 +15,8 @@ const UpdateBO = ({ id, type, username, password, role, title, author, price, da
         setTimeout(async () => {
             if (type === "user") {
                 setLoading(false)
-                console.log("UPDATE BO USER : ", image)
+                console.log("UPDATE BO USER : ", passwordChanged)
+                console.log("UPDATE BO USER : ", password)
                 await updateUser({ id: id, username: username, password: password, role: role, passwordChanged: passwordChanged, image: image })
             } else if (type === "book") {
                 setLoading(false)

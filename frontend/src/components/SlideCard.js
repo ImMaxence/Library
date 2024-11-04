@@ -1,4 +1,5 @@
 import React from 'react';
+import { formattedFrenchDate } from "../utils/formattedFrenchDate"
 
 const SlideCard = ({ image, title, author, date }) => {
     return (
@@ -10,7 +11,7 @@ const SlideCard = ({ image, title, author, date }) => {
                 <h4>{title}</h4>
                 <h5>{author}</h5>
                 <br />
-                <p>le {date}</p>
+                <p>le {formattedFrenchDate(date)}</p>
             </div>
         </div>
     );

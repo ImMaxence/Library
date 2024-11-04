@@ -29,6 +29,9 @@ export const updateUser = async ({ id, username, password, role, passwordChanged
             formData.append('image', image);
         }
 
+        console.log("SERVICE UPDATE USER : ", passwordChanged)
+        console.log("SERVICE UPDATE USER : ", password)
+
         const response = await api.put(`/api/users/update-user/${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',

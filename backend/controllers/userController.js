@@ -80,7 +80,10 @@ exports.updateUser = async (req, res, next) => {
             user.username = username;
         }
 
-        if (password && passwordChanged) {
+        console.log(passwordChanged)
+
+        if (passwordChanged === "true") {
+            console.log("UPDATE USER : password hash")
             user.password = await bcrypt.hash(password, 10);
         }
 
