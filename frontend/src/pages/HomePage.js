@@ -1,19 +1,18 @@
-import { React, useState, useRef, useEffect } from 'react';
-import { logout } from '../services/authService';
-import { useNavigate } from 'react-router-dom';
-import { getAllBooks } from '../services/booksService'
+import React, { useState, useRef, useEffect } from 'react';
+import { getAllBooks } from '../services/booksService';
 import Layout from '../components/Layout';
-import { Button } from 'antd'
-import chevron_left from '../assets/icons/chevron_left.svg'
-import chevron_right from '../assets/icons/chevron_right.svg'
+import { Button, Input, InputNumber, Form } from 'antd'; // Ant Design components
+import chevron_left from '../assets/icons/chevron_left.svg';
+import chevron_right from '../assets/icons/chevron_right.svg';
 import SlideCard from '../components/SlideCard';
-import { getAllFutureBooks } from '../services/futureService'
+import { getAllFutureBooks } from '../services/futureService';
+import CardBook from '../components/CardBook';
 
 const HomePage = () => {
-
     const [error, setError] = useState(null);
     const [dataBooks, setDataBooks] = useState([]);
     const [dataFuture, setDataFuture] = useState([]);
+    const [filters, setFilters] = useState({ title: '', author: '', minPrice: null, maxPrice: null });
 
     const sliderRef = useRef(null);
     const scrollAmount = 300;
@@ -30,30 +29,45 @@ const HomePage = () => {
         }
     };
 
+    const fetchBooks = async (appliedFilters = {}) => {
+        try {
+            const res = await getAllBooks(appliedFilters);
+            setDataBooks(res);
+            console.log(res)
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
     useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const res = await getAllBooks();
-                setDataBooks(res)
-                console.log(res)
-            } catch (err) {
-                console.log(err)
-            }
-        };
+        fetchBooks();
 
         const fetchFuture = async () => {
             try {
-                const res = await getAllFutureBooks()
-                setDataFuture(res)
-                console.log(res)
+                const res = await getAllFutureBooks();
+                setDataFuture(res);
             } catch (err) {
-                console.log(err)
+                console.log(err);
             }
-        }
+        };
 
-        fetchBooks();
-        fetchFuture()
-    }, [])
+        fetchFuture();
+    }, []);
+
+    const onFinish = (values) => {
+        const filtersToApply = Object.fromEntries(
+            Object.entries({
+                title: values.title || '',
+                author: values.author || '',
+                minPrice: values.minPrice ?? null,
+                maxPrice: values.maxPrice ?? null,
+            }).filter(([_, v]) => v !== null && v !== '')
+        );
+
+        setFilters(filtersToApply);
+        fetchBooks(filtersToApply);
+    };
+
 
     return (
         <Layout>
@@ -86,16 +100,39 @@ const HomePage = () => {
                 <h2>Chercher un livre</h2>
                 <div className="home_search_parent_container">
                     <div className="home_search">
-
+                        <Form layout="inline" onFinish={onFinish}>
+                            <Form.Item name="title" label="Titre">
+                                <Input placeholder="Titre du livre" />
+                            </Form.Item>
+                            <Form.Item name="author" label="Auteur">
+                                <Input placeholder="Auteur" />
+                            </Form.Item>
+                            <Form.Item name="minPrice" label="Prix Min">
+                                <InputNumber placeholder="Min" min={0} />
+                            </Form.Item>
+                            <Form.Item name="maxPrice" label="Prix Max">
+                                <InputNumber placeholder="Max" min={0} />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit">Rechercher</Button>
+                            </Form.Item>
+                        </Form>
                     </div>
 
                     <div className="home_item">
-
+                        {dataBooks.map((book) => (
+                            <CardBook
+                                key={book.id}
+                                image={book.image}
+                                title={book.title}
+                                price={book.price}
+                                author={book.author}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
         </Layout>
-
     );
 };
 

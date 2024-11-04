@@ -1,13 +1,15 @@
 import { api } from '../services/apiConfig';
 
-export const getAllBooks = async () => {
+export const getAllBooks = async (filters = {}) => {
     try {
-        const response = await api.get('/api/books/get-all');
+        const queryString = new URLSearchParams(filters).toString(); // Convertit les filtres en chaîne de requête
+        const response = await api.get(`/api/books/get-all?${queryString}`);
         return response.data;
     } catch (error) {
         throw new Error('Technical error during book retrieval');
     }
 };
+
 
 export const addBook = async ({ title, author, price, image }) => {
     try {

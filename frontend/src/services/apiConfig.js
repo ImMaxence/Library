@@ -21,12 +21,10 @@ api.interceptors.response.use(
         return response;
     },
     async (error) => {
-        if (error.response && error.response.status === 401) {
-            console.log("[API SERVICE FRONT] : ❌ Token expiré ou invalide");
-            let navigate = useNavigate();
-            logout();
-            navigate('/');
-        }
+        console.log("[API SERVICE FRONT] : ❌ Token expiré ou invalide");
+        let navigate = useNavigate();
+        logout();
+        navigate('/');
         return Promise.reject(error);
     }
 );

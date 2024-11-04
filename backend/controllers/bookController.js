@@ -1,8 +1,29 @@
 const Book = require('../models/Book');
+const { Op } = require('sequelize');
 
 exports.getAllBooks = async (req, res, next) => {
     try {
-        const books = await Book.findAll({ attributes: ['id', 'title', 'author', 'price', 'image'] });
+        const { title, author, minPrice, maxPrice } = req.query;
+
+        const whereConditions = {};
+
+        if (title) {
+            whereConditions.title = { [Op.like]: `%${title}%` };
+        }
+        if (author) {
+            whereConditions.author = { [Op.like]: `%${author}%` };
+        }
+        if (minPrice) {
+            whereConditions.price = { ...whereConditions.price, [Op.gte]: parseFloat(minPrice) };
+        }
+        if (maxPrice) {
+            whereConditions.price = { ...whereConditions.price, [Op.lte]: parseFloat(maxPrice) };
+        }
+
+        const books = await Book.findAll({
+            where: whereConditions,
+            attributes: ['id', 'title', 'author', 'price', 'image']
+        });
 
         const withImages = books.map(item => {
             if (item.image && Buffer.isBuffer(item.image)) {
@@ -15,7 +36,7 @@ exports.getAllBooks = async (req, res, next) => {
 
         res.json(withImages);
     } catch (error) {
-        next(error)
+        next(error);
     }
 };
 

@@ -1,0 +1,34 @@
+.cardbook_container {
+    height: 400px;
+    background-color: var(--bacground-color);
+    box-shadow: var(--shadow-color);
+    position: relative;
+    border-radius: 1rem;
+}
+
+.cb_image {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.cb_image img {
+    width: 135%;
+}
+
+.cb_content {
+    height: 30%;
+    padding: 10px;
+
+}
+
+#price {
+    position: absolute;
+    bottom: 15px;
+    /* moins le padding du parent */
+    width: calc(100% - 20px);
+}

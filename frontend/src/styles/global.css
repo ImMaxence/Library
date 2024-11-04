@@ -136,3 +136,8 @@ th {
 tr:nth-child(even) {
     background-color: var(--card-background);
 }
+
+ul,
+li {
+    list-style: none;
+}
