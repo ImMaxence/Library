@@ -28,7 +28,7 @@ You need Docker & NodeJs
 # Note 📝
 
 > [!NOTE]
-> Made with ReactJs and NodeJs
+> Made with ReactJs, NodeJs PostgreSQL
 
 > [!CAUTION]
 > Frontend not responsive
