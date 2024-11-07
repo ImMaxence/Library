@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 // get user connecté
 exports.getUserProfile = async (req, res, next) => {
@@ -84,7 +84,7 @@ exports.updateUser = async (req, res, next) => {
 
         if (passwordChanged === "true") {
             console.log("UPDATE USER : password hash")
-            user.password = await bcrypt.hash(password, 10);
+            user.password = await bcryptjs.hashSync(password, 10);
         }
 
         if (role) {
