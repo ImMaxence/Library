@@ -11,7 +11,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const User = require('./models/User');
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 dotenv.config();
 require('./config/passport')(passport);
@@ -41,7 +41,7 @@ const createAdminUser = async () => {
     const existingAdmin = await User.findOne({ where: { username: adminUsername } });
 
     if (!existingAdmin) {
-        const hashedPassword = await bcrypt.hash(adminPassword, 10);
+        const hashedPassword = await bcryptjs.hashSync(adminPassword, 10);
         await User.create({ username: adminUsername, password: hashedPassword, role: 2, image: null });
         console.log(`Admin user created with username: ${adminUsername}`);
     } else {

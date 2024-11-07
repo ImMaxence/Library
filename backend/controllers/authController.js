@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const User = require('../models/User');
 
 exports.register = async (req, res, next) => {
@@ -11,7 +11,7 @@ exports.register = async (req, res, next) => {
             return next({ status: 409, message: 'User already exists' });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcryptjs.hashSync(password, 10);
         const user = await User.create({ username, password: hashedPassword, role: 1, image: null });
 
         res.status(201).json({ message: 'User registered successfully', user });
@@ -25,7 +25,7 @@ exports.login = async (req, res, next) => {
         const { username, password } = req.body;
         const user = await User.findOne({ where: { username } });
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
+        if (!user || !(await bcryptjs.compareSync(password, user.password))) {
             return next({ status: 401, message: 'Invalid credentials' });
         }
 
