@@ -1,22 +1,8 @@
 # How to start ? 📚
 
-You need Docker & NodeJs
+You need Docker Desktop  
 
-**FRONTEND**
-1. cd frontend
-2. .env
-3. npm i
-4. npm start
-
-**DATABASE**
-1. .env
-2. docker-compose up -d
-
-**BACKEND**  
-1. cd backend
-2. .env
-3. npm i
-4. npm start
+run docker-compose up -d  
 
 # Preview 📸
 
